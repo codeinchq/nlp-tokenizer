@@ -1,0 +1,14 @@
+services:
+  npl-tokenizer:
+    container_name: npl-tokenizer
+    image: npl-tokenizer:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_VERSION: "dev"
+        APP_BUILD_ID: "dev"
+        PORT: 80
+    restart: always
+    ports:
+      - "80:80"
