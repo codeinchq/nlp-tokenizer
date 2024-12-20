@@ -6,7 +6,7 @@
 
 This repository contains a simple containerized API to tokenize text using the [spaCy](https://spacy.io/) library. The API is built using [FastAPI](https://fastapi.tiangolo.com/).
 
-The image is available on [Docker Hub](https://hub.docker.com/r/codeinchq/pdf2txt) under the name `codeinchq/nlp-tokenizer`.
+The image is available on [Docker Hub](https://hub.docker.com/r/codeinchq/nlp-tokenizer) under the name `codeinchq/nlp-tokenizer`.
 
 ## Configuration
 
@@ -63,4 +63,4 @@ A PHP 8 client is available at on [GitHub](https://github.com/codeinchq/document
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/codeinchq/pdf2txt?tab=MIT-1-ov-file) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/codeinchq/nlp-tokenizer?tab=MIT-1-ov-file) file for details.
