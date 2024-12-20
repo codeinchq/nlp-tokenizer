@@ -57,10 +57,6 @@ A health check is available at the `/health` endpoint. The server returns a stat
 { "status": "up", "timestamp": "0001-01-01T00:00:00Z" }
 ```
 
-## Client
-
-A PHP 8 client is available at on [GitHub](https://github.com/codeinchq/document-cloud-php-client) and [Packagist](https://packagist.org/packages/codeinc/document-cloud-client).
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/codeinchq/nlp-tokenizer?tab=MIT-1-ov-file) file for details.
