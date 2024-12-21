@@ -28,7 +28,7 @@ class WordsRequest(BaseRequest):
 
 class HealthResponse(BaseModel):
     status: str
-    timestamp: str
+    uptime: str
     version: str
     build_id: str
 

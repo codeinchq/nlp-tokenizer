@@ -20,6 +20,7 @@ nlps = {
 }
 
 app = FastAPI()
+start_time = datetime.now()
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -27,7 +28,7 @@ async def health():
     """Health check endpoint."""
     return {
         "status": "ok",
-        "timestamp": datetime.now().isoformat(),
+        "uptime": str(datetime.now() - start_time),
         "version": getenv("VERSION", "0.0.0"),
         "build_id": getenv("BUILD_ID", "0")
     }
