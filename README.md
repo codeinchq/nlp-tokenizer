@@ -34,9 +34,11 @@ curl -X POST "http://127.0.0.1:8000/tokenize/sentences" \
 
 ### Word Tokenization
 
-The work tokenization endpoint is available at `/tokenize/words` and accept the following parameters:
+The word tokenization endpoint is available at `/tokenize/words` and accept the following parameters:
 - `text`: the text to tokenize
 - `lang`: the language of the text (optional)
+- `exclude_punct`: exclude punctuation from the tokenization (optional, default: `true`)
+- `lowercase`: lowercase the tokens (optional, default: `false`)
 
 ```shell
 curl -X POST "http://127.0.0.1:8000/tokenize/words" \
