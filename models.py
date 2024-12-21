@@ -19,7 +19,7 @@ class BaseRequest(BaseModel):
 class SentencesRequest(BaseRequest):
     pass
 
-class NounRequest(BaseRequest):
+class ParagraphsRequest(BaseRequest):
     pass
 
 class WordsRequest(BaseRequest):

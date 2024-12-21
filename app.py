@@ -6,13 +6,12 @@
 #  license that can be found in the LICENSE file or at
 #  https://opensource.org/licenses/MIT.
 
-from fastapi import FastAPI, HTTPException
 from datetime import datetime
-from models import SentencesRequest, WordsRequest, HealthResponse, TokenizerResponse, Language, VectorizerResponse
-from fastapi import UploadFile, File, HTTPException
-import spacy
-from spacy_layout import spaCyLayout
 from os import getenv
+import spacy
+from fastapi import FastAPI
+from fastapi import HTTPException
+from models import SentencesRequest, WordsRequest, HealthResponse, TokenizerResponse, Language, ParagraphsRequest
 
 # Load SpaCy language model
 nlps = {
@@ -38,11 +37,9 @@ async def health():
 async def tokenize_sentences(request: SentencesRequest):
     """Tokenize text into sentences."""
     try:
-        # Use SpaCy to tokenize into sentences
         doc = nlps[request.lang](request.text)
-        tokens = [sent.text for sent in doc.sents]
 
-        return {"tokens": tokens}
+        return {"tokens": [sent.text for sent in doc.sents]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -70,17 +67,22 @@ async def tokenize_words(request: WordsRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# @todo
-@app.post("/tokenize/pdf")
-async def vectorize_pdf(file: UploadFile = File(...), lang: Language = Language.en):
-    """Extract text from a PDF file and tokenize it."""
+@app.post("/tokenize/paragraphs", response_model=TokenizerResponse)
+async def tokenize_words(request: ParagraphsRequest):
+    """Tokenize text into paragraphs."""
     try:
-        nlp = spacy.blank(lang.name)
-        layout = spaCyLayout(nlp)
+        doc = nlps[request.lang](request.text)
 
-        # Process a document and create a spaCy Doc object
-        doc = layout(await file.read())
+        # Extract paragraphs
+        start = 0
+        paragraphs = []
+        for token in doc:
+            if token.is_space and token.text.count("\n") > 1:
+                paragraphs.append(doc[start:token.i].text.strip())
+                start = token.i
+        paragraphs.append(doc[start:].text.strip())
 
-        return doc._.layout
+        return {"tokens": paragraphs}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error processing the PDF: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
