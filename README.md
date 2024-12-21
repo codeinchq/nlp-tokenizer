@@ -22,32 +22,38 @@ docker run -p "8000:8000" codeinchq/nlp-tokenizer
 
 ### Sentence Tokenization
 
+The sentence tokenization endpoint is available at `/tokenize/sentences` and accept the following parameters:
+- `text`: the text to tokenize
+- `lang`: the language of the text (optional)
+
 ```shell
 curl -X POST "http://127.0.0.1:8000/tokenize/sentences" \
 -H "Content-Type: application/json" \
 -d '{"text": "This is a sample sentence for the documentation. It is used for illustrative purposes."}'
-```
-
-#### In French
-```shell
-curl -X POST "http://127.0.0.1:8000/tokenize/sentences" \
--H "Content-Type: application/json" \
--d '{"lang": "fr", "text": "Ceci est une phrase d’exemple pour la documentation. Elle est utilisée à des fins illustratives."}'
 ```
 
 ### Word Tokenization
 
+The work tokenization endpoint is available at `/tokenize/words` and accept the following parameters:
+- `text`: the text to tokenize
+- `lang`: the language of the text (optional)
+
 ```shell
 curl -X POST "http://127.0.0.1:8000/tokenize/words" \
 -H "Content-Type: application/json" \
 -d '{"text": "This is a sample sentence for the documentation. It is used for illustrative purposes."}'
 ```
 
-#### In French
+### Paragraph Tokenization
+
+The paragraph tokenization endpoint is available at `/tokenize/paragraphs` and accept the following parameters:
+- `text`: the text to tokenize
+- `lang`: the language of the text (optional)
+
 ```shell
-curl -X POST "http://127.0.0.1:8000/tokenize/words" \
+curl -X POST "http://127.0.0.1:8000/tokenize/paragraphs" \
 -H "Content-Type: application/json" \
--d '{"lang": "fr", "text": "Ceci est une phrase d’exemple pour la documentation. Elle est utilisée à des fins illustratives."}'
+-d '{"text": "This is a sample sentence for the documentation. It is used for illustrative purposes."}'
 ```
 
 ### Health check
